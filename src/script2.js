@@ -1,5 +1,5 @@
 import { rotatearray, checkIf8, countOnes, topzeros, leftzeros, html, htmlclick, binaryStringTo3x3Array, shapes } from "./rotate.js";
-import anime from "../node_modules/animejs/lib/anime.es.js";
+import anime from "./anime.es.js ";
 
 
 
