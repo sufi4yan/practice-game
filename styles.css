@@ -1,0 +1,31 @@
+.cont{
+    display: grid;
+    grid-template-columns: repeat(7, 50px);
+    grid-template-rows: repeat(7, 50px);
+    justify-content: center;
+}
+.boxes{
+    width: 50px;
+    height: 50px;
+    outline: 1px solid rgb(144, 135, 135);
+}
+.gen{
+    width: 100%;
+    height: 200px;
+    background-color: #867d7d;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+.random{
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(3, 50px);
+}
+.how{
+    border: 1px solid rgb(255, 255, 255);
+    width:50px;
+    height:50px;
+    background-color: black;
+
+}
