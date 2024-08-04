@@ -233,3 +233,33 @@ export let shapes = [
     "110000000", // array2d12
     "100000000",  // array2d13
 ];
+export function score(){
+    let scores = 0
+
+    function increment(lines){
+        scores += (Math.round(lines + 100) ** lines) 
+    }
+
+    function getscore() {
+        return scores
+    }
+    return {increment, getscore}
+}
+export function loader() {
+document.onreadystatechange = function(){
+    if (document.readyState !== "complete") {
+        
+        document.querySelector("#loader").style.visibility = "visible";
+    } else {
+        setTimeout(() => {
+            document.querySelector("#loader").style.display = "none";
+            document.querySelector("#cont").style.visibility = "visible";
+            document.querySelector("#generate").style.visibility = "visible";
+        }, 150);
+
+
+        
+    }
+}
+    
+};

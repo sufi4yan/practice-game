@@ -1,4 +1,4 @@
-import { rotatearray, checkIf8, countOnes, topzeros, leftzeros, html, htmlclick, binaryStringTo3x3Array, shapes } from "./rotate.js";
+import { rotatearray, checkIf8, countOnes, topzeros, leftzeros, html, htmlclick, binaryStringTo3x3Array, shapes, score, loader } from "./rotate.js";
 import anime from "./anime.es.js ";
 
 const nextranddiv = document.querySelector(`.next-random`)
@@ -147,168 +147,301 @@ else{
 }
 
 }, 10);
+let element = null
+if (screen.width > 500){
+    container.addEventListener(`mouseover`, (eve) => {
 
-
-container.addEventListener(`mouseover`, (eve) => {
-   
-    try {
-        let unfit = false
-        let id = eve.target.id
-                let idsx = Number(id)
-                let idsy = Number(id) + 1
-                let idsz = Number(id) + 2
-
-       
-        
-
-        if (tracking){
-            proj(0, idsx)
-            proj(1, idsy)
-            proj(2, idsz)
-
-
-        if (projrarr.length !== countOnes(displayedshape)){
-            projection = false
-            projrarr = []
-            throw new Error(`hello`)
-        }
-        else{
-            projection = true
-        }
     
-            if (!unfit){
-                document.querySelectorAll(`.boxes`).forEach((box) => {
 
-                    if (!filledarr.includes(Number(box.id))){
-
-                        box.style.background = `none`
-                    }
-                        
-                    
-                    
-                })
-
-
-
-                filledarr.forEach((num) => {
-                    if (id === num) {
-                        
-                        //console.log(`what`)
-                        throw new Error(`hello`)
-                    }
-                })
-                projrarr = []
-                html(0, idsx, displayedshape, filledarr)
-                html(1, idsy, displayedshape, filledarr)
-                html(2, idsz, displayedshape, filledarr)
+        try {
+            let unfit = false
+            let id = eve.target.id
+                    let idsx = Number(id)
+                    let idsy = Number(id) + 1
+                    let idsz = Number(id) + 2
     
-            }
-        } 
-        
-        
-            }
-            catch (error) {
+           
+            
+    
+            if (tracking){
+                proj(0, idsx)
+                proj(1, idsy)
+                proj(2, idsz)
+    
+    
+            if (projrarr.length !== countOnes(displayedshape)){
                 projection = false
-                document.querySelectorAll(`.boxes`).forEach((box) => {
-                    
-                    if (!filledarr.includes(Number(box.id))){
-        
-                        box.style.background = `none`
-                    }
-                
-                
-            })
-            }
- 
-})
-container.addEventListener(`touchstart`, (eve) => {
-
-    try {
-        let unfit = false
-        let id = eve.target.id
-                let idsx = Number(id)
-                let idsy = Number(id) + 1
-                let idsz = Number(id) + 2
-
-       
-        
-
-        if (tracking){
-            proj(0, idsx)
-            proj(1, idsy)
-            proj(2, idsz)
-
-
-        if (projrarr.length !== countOnes(displayedshape)){
-            projection = false
-            projrarr = []
-            throw new Error(`hello`)
-        }
-        else{
-            projection = true
-        }
-    
-            if (!unfit){
-                document.querySelectorAll(`.boxes`).forEach((box) => {
-
-                    if (!filledarr.includes(Number(box.id))){
-
-                        box.style.background = `none`
-                    }
-                        
-                    
-                    
-                })
-
-
-
-                filledarr.forEach((num) => {
-                    if (id === num) {
-                        
-                        //console.log(`what`)
-                        throw new Error(`hello`)
-                    }
-                })
                 projrarr = []
-                html(0, idsx, displayedshape, filledarr)
-                html(1, idsy, displayedshape, filledarr)
-                html(2, idsz, displayedshape, filledarr)
+                throw new Error(`hello`)
+            }
+            else{
+                projection = true
+            }
+        
+                if (!unfit){
+                    document.querySelectorAll(`.boxes`).forEach((box) => {
     
-            }
-        } 
+                        if (!filledarr.includes(Number(box.id))){
+    
+                            box.style.background = `none`
+                        }
+                            
+                        
+                        
+                    })
+    
+    
+    
+                    filledarr.forEach((num) => {
+                        if (id === num) {
+                            
+                            //console.log(`what`)
+                            throw new Error(`hello`)
+                        }
+                    })
+                    projrarr = []
+                    html(0, idsx, displayedshape, filledarr)
+                    html(1, idsy, displayedshape, filledarr)
+                    html(2, idsz, displayedshape, filledarr)
         
-        
-            }
-            catch (error) {
-                projection = false
-                document.querySelectorAll(`.boxes`).forEach((box) => {
+                }
+            } 
+            
+            
+                }
+                catch (error) {
+                    projection = false
+                    document.querySelectorAll(`.boxes`).forEach((box) => {
+                        
+                        if (!filledarr.includes(Number(box.id))){
+            
+                            box.style.background = `none`
+                        }
                     
-                    if (!filledarr.includes(Number(box.id))){
+                    
+                })
+                }
+     
+    })
+    
+    
+    container.addEventListener(`mouseup`, ev => {
+        projrarr = []
+        if (tracking && projection){
+            
+            tracking = false
+            const targ = ev.target
+            
         
-                        box.style.background = `none`
-                    }
+        
+        
+        
+        
+            let id = ev.target.id
+        
+            let idsx = Number(id)
+            let idsy = Number(id) + 1
+            let idsz = Number(id) + 2
+              
+            htmlclick(0, idsx, filledarr, displayedshape) //for row 1
+            htmlclick(1, idsy, filledarr, displayedshape) //for row 2
+            htmlclick(2, idsz, filledarr, displayedshape) //for row 3
+    
+                
+            all()
+        }
+        
+    
+            let lines = 0
+       function iswin(){
+        
+        let finarrx = new Set()
+      
+        filledarr.forEach((num) => {
+            finarrx.add(String(num).replace(`0`, ``))
+    
+        })
+    
+        let finisher = []
+    
+            finarrx.forEach((num) => {
+                    finisher.push(Number(String(num).slice(-1)))
+                })
+    
+                    const columns = checkIf8(finisher.sort())
+                const columnsToRemove = columns.getbuffer()
+                if (columnsToRemove){
+                    lines ++
+                    for (let i = 1; i < 9; i++){
+                        
+                        anime({
+                            targets: document.getElementById(`${i}0${columnsToRemove}`),
+                            scale: [1.5, 0],
+                            duration:500,
+                            easing: `easeInOutQuad`,
+                            complete: function(){anime({
+                                targets: document.getElementById(`${i}0${columnsToRemove}`),
+                                scale: [0, 1],
+                                duration: 10
+                            })}
+                        
+                        
+                        })
+                        setTimeout(() => {
+                                document.getElementById(`${i}0${columnsToRemove}`).style.background = `none`
+                        }, 1500);
+                        
+                        //
+                        filledarr = filledarr.filter(num => num !== Number(`${i}0${columnsToRemove}`))
+    
+                         
+                     }
+                     
+                     iswin()
+    
+                }
+            return lines
+       }
+    
+        lines = iswin()
+       if (lines > 0){
+        scorecard.increment(lines)
+       }
+        
+        
+    
+    const interval = setInterval(() => {
+            if (num <= scorecard.getscore()){
+            let scoretext = document.getElementById(`score`)
+            scoretext.innerText = num
+            num ++
+        
+        
+    }
+    else{
+        clearInterval(interval)
+    }
+    }, 0.1);
+      
+    
+    
+    
+    
+    
+    
+       let loss = isloss()
+       if (loss){
+    
+        document.getElementById(`losepopup`).style.transform = `scale(1)`
+        document.getElementById(`endscore`).innerText = `Score: ${scorecard.getscore()}`
+        document.getElementById(`retry`).addEventListener(`click`, () =>  document.getElementById(`losepopup`).style.display = `none`)
+       }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
                 
                 
-            })
+                 
+    
+    })
+}
+
+else{
+    
+    container.addEventListener(`touchmove`, (eve) => {
+        const touch = eve.touches[0];
+        element = document.elementFromPoint(touch.clientX, touch.clientY);
+
+        
+    
+        try {
+            let unfit = false
+            let id = element.id
+                    let idsx = Number(id)
+                    let idsy = Number(id) + 1
+                    let idsz = Number(id) + 2
+    
+           
+            
+    
+            if (tracking){
+                proj(0, idsx)
+                proj(1, idsy)
+                proj(2, idsz)
+    
+    
+            if (projrarr.length !== countOnes(displayedshape)){
+                projection = false
+                projrarr = []
+                throw new Error(`hello`)
             }
-
-   
- 
-})
-
-container.addEventListener(`mouseup`, ev => {
+            else{
+                projection = true
+            }
+        
+                if (!unfit){
+                    document.querySelectorAll(`.boxes`).forEach((box) => {
+    
+                        if (!filledarr.includes(Number(box.id))){
+    
+                            box.style.background = `none`
+                        }
+                            
+                        
+                        
+                    })
+    
+    
+    
+                    filledarr.forEach((num) => {
+                        if (id === num) {
+                            
+                            //console.log(`what`)
+                            throw new Error(`hello`)
+                        }
+                    })
+                    projrarr = []
+                    html(0, idsx, displayedshape, filledarr)
+                    html(1, idsy, displayedshape, filledarr)
+                    html(2, idsz, displayedshape, filledarr)
+        
+                }
+            } 
+            
+            
+                }
+                catch (error) {
+                    projection = false
+                    document.querySelectorAll(`.boxes`).forEach((box) => {
+                        
+                        if (!filledarr.includes(Number(box.id))){
+            
+                            box.style.background = `none`
+                        }
+                    
+                    
+                })
+                }
+               
+    })
+    
+}
+container.addEventListener(`touchend`, ev => {
     projrarr = []
     if (tracking && projection){
-        
+
         tracking = false
         const targ = ev.target
-        
-    
-    
-    
-    
-    
-        let id = ev.target.id
+        let id = element.id
+        console.log(id)
     
         let idsx = Number(id)
         let idsy = Number(id) + 1
@@ -393,11 +526,6 @@ else{
     clearInterval(interval)
 }
 }, 0.1);
-  
-
-
-
-
 
 
    let loss = isloss()
@@ -407,42 +535,31 @@ else{
     document.getElementById(`endscore`).innerText = `Score: ${scorecard.getscore()}`
     document.getElementById(`retry`).addEventListener(`click`, () =>  document.getElementById(`losepopup`).style.display = `none`)
    }
-
-
-
-
-
-
-
-
-
-
-
-            
-            
-             
-
 })
 
-document.onreadystatechange = function() {
-
-    if (document.readyState !== "complete") {
-        
-        document.querySelector("#loader").style.visibility = "visible";
-    } else {
-        setTimeout(() => {
-            document.querySelector("#loader").style.display = "none";
-            document.querySelector("#cont").style.visibility = "visible";
-            document.querySelector("#generate").style.visibility = "visible";
-        }, 15);
 
 
-        
-    }
-};
-document.querySelector("#cont").style.visibility = "hidden";
-document.querySelector("#generate").style.visibility = "hidden";
-console.log(document.readyState)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+loader()
+
+
 
 
 let children = Array.from(document.querySelector(`#cont`).children)
@@ -543,20 +660,9 @@ if (loss){
  }, 100);
     
 }
-function score(){
-    let scores = 0
-
-    function increment(lines){
-        scores += (Math.round(lines + 100) ** lines) 
-    }
-
-    function getscore() {
-        return scores
-    }
-    return {increment, getscore}
-}
 
 
+console.log(screen.width, screen.height)
 
-
+  
     
