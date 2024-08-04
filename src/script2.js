@@ -519,31 +519,26 @@ else{
     document.getElementById(`retry`).addEventListener(`click`, () =>  document.getElementById(`losepopup`).style.display = `none`)
    }
 })
-randdiv.addEventListener(`touchmove`, () => {
-    container.addEventListener(`touchmove`, () => {
-        console.log(`hello`)
-      })
+
     document.addEventListener(`touchmove`, (ev) => {
         const touch = ev.touches[0];
         element = document.elementFromPoint(touch.clientX, touch.clientY)
-        if (!projection){
+
            
             randdiv.style.position = `absolute`
     
             randdiv.style.transform = `translate(${touch.clientX - 150}px, ${touch.clientY - 500}px)`
-          
+            
         }  
-        else{
-            randdiv.style.transform = `none`
-        }
+        
     
           
     
         
-    })
+    )
     document.addEventListener(`touchend`, () => {randdiv.style.transform = `none`})
     
-})
+
 
 }
 
