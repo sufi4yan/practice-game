@@ -383,7 +383,7 @@ const interval = setInterval(() => {
 else{
     clearInterval(interval)
 }
-}, 1);
+}, 0.1);
   
 
 
@@ -538,7 +538,7 @@ function score(){
     let scores = 0
 
     function increment(lines){
-        scores += (Math.round(lines + 10) ** lines + 1) 
+        scores += (Math.round(lines + 100) ** lines) 
     }
 
     function getscore() {
