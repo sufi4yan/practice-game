@@ -538,7 +538,7 @@ function score(){
     let scores = 0
 
     function increment(lines){
-        scores += (Math.round(lines + 10) ** lines ) 
+        scores += (Math.round(lines + 10) ** lines + 1) 
     }
 
     function getscore() {
