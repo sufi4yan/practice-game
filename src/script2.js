@@ -439,7 +439,7 @@ console.log(document.readyState)
 let children = Array.from(document.querySelector(`#cont`).children)
 let arrayn = []
 children.forEach((child) => {
- if (!filledarr.includes(Number(child.id)))
+ 
  arrayn.push(Number(child.id))
 
 })
