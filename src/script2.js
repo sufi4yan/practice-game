@@ -1,7 +1,7 @@
 import { rotatearray, checkIf8, countOnes, topzeros, leftzeros, html, htmlclick, binaryStringTo3x3Array, shapes } from "./rotate.js";
 import anime from "./anime.es.js ";
 
-
+const nextranddiv = document.querySelector(`.next-random`)
 
 const scorecard = score()
 
@@ -21,7 +21,7 @@ const randomRotate = randomfromarray(rotationpossibles)
 //console.log(randomRotate)
 
 let displayedshape = rotatearray(shape, randomRotate)
-
+let nextdisplayedshape = rotatearray(shape, randomRotate)
 
 const randdiv = document.getElementById(`random`)
 
@@ -43,8 +43,10 @@ function proj(row, ids){
 
 
 function all(){
-    shape = binaryStringTo3x3Array(randomfromarray(shapes))
-    displayedshape = rotatearray(shape, randomRotate)
+    
+    shape = rotatearray(binaryStringTo3x3Array(randomfromarray(shapes)), randomRotate)
+    displayedshape = nextdisplayedshape
+    nextdisplayedshape = shape
 
     //To remove empty lines from the 3x3 matrix
     leftzeros(displayedshape)
@@ -54,36 +56,43 @@ function all(){
     topzeros(displayedshape)
     let randarr = []
 
+function drawshape(div, classe, shapetype) {
     setTimeout(() => {
-            randdiv.innerHTML = ``
-        displayedshape[0].forEach((number) => {
-            if (number === 1) {
-                //console.log(`yes`)
-                randdiv.innerHTML += `<div class="how"></div>`
-            }
-            else{
-                randdiv.innerHTML += `<div></div>`
-            }
-        })
-        displayedshape[1].forEach((number) => {
-            if (number === 1) {
-                //console.log(`yes`)
-                randdiv.innerHTML += `<div class="how"></div>`
-            }
-            else{
-                randdiv.innerHTML += `<div></div>`
-            }
-        })
-        displayedshape[2].forEach((number) => {
-            if (number === 1) {
-                //console.log(`yes`)
-                randdiv.innerHTML += `<div class="how"></div>`
-            }
-            else{
-                randdiv.innerHTML += `<div></div>`
-            }
-        })
-    }, 200);
+        div.innerHTML = ``
+    shapetype[0].forEach((number) => {
+        if (number === 1) {
+            //console.log(`yes`)
+            div.innerHTML += `<div class="${classe}"></div>`
+        }
+        else{
+            div.innerHTML += `<div></div>`
+        }
+    })
+    shapetype[1].forEach((number) => {
+        if (number === 1) {
+            //console.log(`yes`)
+            div.innerHTML += `<div class="${classe}"></div>`
+        }
+        else{
+            div.innerHTML += `<div></div>`
+        }
+    })
+    shapetype[2].forEach((number) => {
+        if (number === 1) {
+            //console.log(`yes`)
+            div.innerHTML += `<div class="${classe}"></div>`
+        }
+        else{
+            div.innerHTML += `<div></div>`
+        }
+    })
+}, 200);
+}
+drawshape(randdiv, `how`, displayedshape)
+drawshape(nextranddiv, `nexthow`, nextdisplayedshape)
+
+
+
 
 
     filtered = randarr.filter(num => num !=0)
