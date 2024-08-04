@@ -396,7 +396,7 @@ else{
 
     document.getElementById(`losepopup`).style.transform = `scale(1)`
     document.getElementById(`endscore`).innerText = `Score: ${scorecard.getscore()}`
-    document.getElementById(`retry`).addEventListener(`click`, () =>  location.reload())
+    document.getElementById(`retry`).addEventListener(`click`, () =>  document.getElementById(`losepopup`).style.display = `none`)
    }
 
 
