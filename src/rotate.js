@@ -174,6 +174,7 @@ export function htmlclick(row, ids, mode, displayedshape){
         try {
             if (num === 1){
                 document.getElementById(ids).style.backgroundColor = color
+
                 mode.push(ids)
                 ids += 100
                

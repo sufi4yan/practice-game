@@ -129,24 +129,7 @@ let projrarr = []
 
 
 let tracking = true
-setInterval(() => {
 
-if (tracking) {
-    childs.forEach((child) => {
-        if(child.className === `how`){
-            child.style.border = `2px solid blue`
-        }
-    })
-}
-else{
-    childs.forEach((child) => {
-        if(child.className === `how`){
-            child.style.border = `1px solid white`
-        }
-    })
-}
-
-}, 10);
 let element = null
 if (screen.width > 500){
     container.addEventListener(`mouseover`, (eve) => {
@@ -360,8 +343,7 @@ else{
         const touch = eve.touches[0];
         element = document.elementFromPoint(touch.clientX, touch.clientY);
 
-        
-    
+
         try {
             let unfit = false
             let id = element.id
@@ -370,7 +352,8 @@ else{
                     let idsz = Number(id) + 2
     
            
-            
+        //     randdiv.style.position = `absolute`
+        // randdiv.style.left = `${touch.clientX}px`
     
             if (tracking){
                 proj(0, idsx)
@@ -433,7 +416,7 @@ else{
                
     })
     
-}
+
 container.addEventListener(`touchend`, ev => {
     projrarr = []
     if (tracking && projection){
@@ -536,8 +519,33 @@ else{
     document.getElementById(`retry`).addEventListener(`click`, () =>  document.getElementById(`losepopup`).style.display = `none`)
    }
 })
+randdiv.addEventListener(`touchmove`, () => {
+    container.addEventListener(`touchmove`, () => {
+        console.log(`hello`)
+      })
+    document.addEventListener(`touchmove`, (ev) => {
+        const touch = ev.touches[0];
+        element = document.elementFromPoint(touch.clientX, touch.clientY)
+        if (!projection){
+           
+            randdiv.style.position = `absolute`
+    
+            randdiv.style.transform = `translate(${touch.clientX - 150}px, ${touch.clientY - 500}px)`
+          
+        }  
+        else{
+            randdiv.style.transform = `none`
+        }
+    
+          
+    
+        
+    })
+    document.addEventListener(`touchend`, () => {randdiv.style.transform = `none`})
+    
+})
 
-
+}
 
 
 
